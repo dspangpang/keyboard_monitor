@@ -1,0 +1,4 @@
+*.idea
+*.clion.source.upload.marker
+*cmake*
+*.uuid
