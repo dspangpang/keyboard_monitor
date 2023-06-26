@@ -3,8 +3,6 @@ project(keyboard_monitor)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
-# add for clion
-list(APPEND CMAKE_PREFIX_PATH /opt/ros/noetic/)
 
 find_package(Boost REQUIRED)
 
@@ -13,6 +11,8 @@ find_package(Boost REQUIRED)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   roscpp
+  std_msgs
+  geometry_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -140,6 +140,9 @@ add_executable(${PROJECT_NAME}_node
         nodes/keyboard_monitor_node.cpp
         src/KeyboardMonitor.cpp)
 
+add_executable(keyboard_to_cmd_vel_node
+        nodes/keyboard_to_cmd_vel_node.cpp)
+
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
@@ -151,10 +154,14 @@ add_executable(${PROJECT_NAME}_node
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
- target_link_libraries(${PROJECT_NAME}_node
-   ${catkin_LIBRARIES}
-         ${Boost_LIBRARIES}
- )
+target_link_libraries(${PROJECT_NAME}_node
+    ${catkin_LIBRARIES}
+    ${Boost_LIBRARIES}
+)
+
+target_link_libraries(keyboard_to_cmd_vel_node
+    ${catkin_LIBRARIES}
+)
 
 #############
 ## Install ##

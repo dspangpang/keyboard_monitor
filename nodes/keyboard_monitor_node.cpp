@@ -16,7 +16,7 @@ int main(int argc, char ** argv){
     const auto& tmp_node_name = ros::this_node::getName();
 
     nh.getParam(tmp_node_name + "/pub_frequency",frequency);
-
+    
     ros::Rate rate(frequency);
 
     km.start();

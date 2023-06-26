@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+
+    <node pkg="keyboard_monitor" type="keyboard_monitor_node"
+          name="keyboard_monitor_node" output="screen">
+
+        <param name="pub_topic" value="/keyboard_value" type="string"/>
+        <param name="pub_frequency" value="100" type="double"/>
+
+    </node>
+
+
+    <node pkg="keyboard_monitor" type="keyboard_to_cmd_vel_node"
+          name="keyboard_to_cmd_vel_node" output="screen">
+
+        <param name="sub_topic" value="/keyboard_value" type="string"/>
+
+    </node>
+
+</launch>
